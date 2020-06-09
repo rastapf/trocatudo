@@ -8,16 +8,24 @@ const doacoesController = {
                 attributes: ['id', 'nome']
             },
             {
-                association: 'itens',
-                attributes: ['id', 'nome']
+                association: 'pedidos',
+                attributes: ['id', 'nome'],
+                required: true
             }]
         })
 
-        const response = result.dataValues.map(doacao => {
+        const response = await result.map(doacao => {
+            const itens = doacao.pedidos.map(item => {
+                return {
+                    id: item.id,
+                    nome: item.nome
+                }
+            })
+            
             return {
                 id: doacao.id,
                 descricao: doacao.descricao,
-                itens: doacao.itens,
+                itens,
                 solicitante: doacao.solicitante
             }
         })

@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     Troca.belongsToMany(models.Item, {
       through: 'itens_trocas',
       foreignKey: 'idTroca',
-      as: 'itens'
+      as: 'pedidos'
     })
   };
   return Troca;
